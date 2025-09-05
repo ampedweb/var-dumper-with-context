@@ -19,6 +19,16 @@ Usage
 
 That's it! Simply call `dump()` as you normally would and the file and line number will appear. 
 
+## Env Variables
+If you would like to generate links to the file and line for IDE you can set the following environment variables:
+
+```dotenv
+VAR_DUMPER_REMOTE_BASE_PATH=/usr/share/deploys/your-project/current
+VAR_DUMPER_LOCAL_BASE_PATH=/Users/your.user/dev/your-project
+VAR_DUMPER_IDE=phpstorm
+# vscode, phpstorm, sublime, textmate, emacs, macvim, idea, atom, nova, netbeans
+```
+
 Laravel Note
 -----
 Laravel 5.7 ships with `beyondcode/laravel-dump-server` which will disable this extension. To enable this extension again, simply add the below to your application's `composer.json` and run `php artisan package:discover` again.
