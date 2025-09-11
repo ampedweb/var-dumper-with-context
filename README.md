@@ -25,8 +25,7 @@ If you would like to generate links to the file and line for IDE you can set the
 ```dotenv
 VAR_DUMPER_CONTEXT_REMOTE_BASE_PATH=/usr/share/deploys/your-project/current
 VAR_DUMPER_CONTEXT_LOCAL_BASE_PATH=/Users/your.user/dev/your-project
-VAR_DUMPER_CONTEXT_EDITOR=phpstorm # vscode, phpstorm, sublime, textmate, emacs, macvim, idea, atom, nova, netbeans
-VAR_DUMPER_CONTEXT_LINK_COLOR='blue' # any valid css color
+VAR_DUMPER_CONTEXT_EDITOR=vscode # vscode, phpstorm, sublime, textmate, emacs, macvim, idea, atom, nova, netbeans
 ```
 
 Laravel Note
