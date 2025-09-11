@@ -46,12 +46,12 @@ class HtmlDumper extends BaseDumper implements DumpContextInterface
             return "<pre><small>{$file}:{$line}</small></pre>";
         }
 
-        $style = '';
+        $style = 'display:block; margin-top:2px; margin-bottom:2px;';
         if($this->linkColor) {
-            $style = 'style="color: ' . $this->linkColor . '; text-decoration: underline;"';
+            $style = $style.' color: ' . $this->linkColor . ';';
         }
 
-        return "<a href='{$href}' {$style}><pre><small>{$file}:{$line}</small></pre></a>";
+        return "<a href='{$href}' style='{$style}'><pre><small>{$file}:{$line}</small></pre></a>";
     }
 
     public function setEditor(?string $editor): static
