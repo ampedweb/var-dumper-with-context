@@ -12,8 +12,7 @@ VarDumper::setHandler(function ($var) {
     if ($dumper instanceof HtmlDumper) {
         $dumper->setRemoteBasePath($_ENV['VAR_DUMPER_CONTEXT_REMOTE_BASE_PATH'] ?? null)
                ->setLocalBasePath($_ENV['VAR_DUMPER_CONTEXT_LOCAL_BASE_PATH'] ?? null)
-               ->setEditor($_ENV['VAR_DUMPER_CONTEXT_EDITOR'] ?? null)
-               ->setLinkColor($_ENV['VAR_DUMPER_CONTEXT_LINK_COLOR'] ?? null);
+               ->setEditor($_ENV['VAR_DUMPER_CONTEXT_EDITOR'] ?? null);
     }
 
     $dumper->dump($cloner->cloneVar($var));
