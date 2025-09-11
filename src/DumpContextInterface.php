@@ -5,6 +5,6 @@ namespace AmpedWeb\VarDumperWithContext;
 interface DumpContextInterface
 {
 
-    public function getContext($file, $line): string;
+    public function getContext(string $file, int | null $line): string;
 
 }

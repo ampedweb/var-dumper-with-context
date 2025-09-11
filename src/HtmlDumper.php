@@ -2,6 +2,7 @@
 
 namespace AmpedWeb\VarDumperWithContext;
 
+use http\Encoding\Stream;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper as BaseDumper;
 
 class HtmlDumper extends BaseDumper implements DumpContextInterface
@@ -9,7 +10,7 @@ class HtmlDumper extends BaseDumper implements DumpContextInterface
     use ContextDumper;
 
     /**
-     * All of the href formats for common editors.
+     * All the href formats for common editors.
      *
      * @var array<string, string>
      */
@@ -35,8 +36,9 @@ class HtmlDumper extends BaseDumper implements DumpContextInterface
     protected string|null $editor = null;
     protected string|null $localBasePath = null;
     protected string|null $remoteBasePath = null;
+    protected string|null $linkColor = null;
 
-    public function getContext($file, $line): string
+    public function getContext(string $file, int|null $line): string
     {
         $href = $this->resolveSourceHref($file, $line);
 
@@ -44,28 +46,46 @@ class HtmlDumper extends BaseDumper implements DumpContextInterface
             return "<pre><small>{$file}:{$line}</small></pre>";
         }
 
-        return "<a href='{$href}'><pre><small>{$file}:{$line}</small></pre></a>";
+        $style = 'display:block; margin-top:2px; margin-bottom:2px;';
+        if($this->linkColor) {
+            $style = $style.' color: ' . $this->linkColor . ';';
+        }
+
+        return "<a href='{$href}' style='{$style}'><pre><small>{$file}:{$line}</small></pre></a>";
     }
 
-    public function setEditor(string $editor): void
+    public function setEditor(?string $editor): static
     {
         $this->editor = $editor;
+
+        return $this;
+    }
+
+    public function setLinkColor(?string $color): static
+    {
+        $this->linkColor = $color;
+
+        return $this;
     }
 
     /**
      * The path to the project on the local/host machine where the editor is running.
      */
-    public function setLocalBasePath(string $basePath): void
+    public function setLocalBasePath(?string $basePath): static
     {
         $this->localBasePath = $basePath;
+
+        return $this;
     }
 
     /**
      * The path top the project on the remote server (eg. in Docker, the path inside the container).
      */
-    public function setRemoteBasePath(string $basePath): void
+    public function setRemoteBasePath(?string $basePath): static
     {
         $this->remoteBasePath = $basePath;
+
+        return $this;
     }
 
     /**
@@ -75,7 +95,7 @@ class HtmlDumper extends BaseDumper implements DumpContextInterface
      * @param  int|null  $line
      * @return string|null
      */
-    protected function resolveSourceHref($file, $line): string|null
+    protected function resolveSourceHref(string $file, int|null $line): string|null
     {
         if ($this->editor === null) {
             return null;
